@@ -1,4 +1,4 @@
-name: Cloud Functions Deploy
+name: Deploy cancel_order
 
 on:
   push:
