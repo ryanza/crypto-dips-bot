@@ -1,0 +1,4 @@
+firebase_admin
+binance-connector
+Flask
+git+https://github.com/omaral92/crypto-dips-bot.git@main
