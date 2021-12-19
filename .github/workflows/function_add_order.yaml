@@ -1,0 +1,29 @@
+name: Cloud Functions Deploy
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+    paths:
+      - 'functions/add_order.py'
+  workflow_dispatch:
+
+jobs:
+  deploy-function:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Deploy Function
+        id: deploy
+        working-directory: ./functions/add_order
+        run: gcloud functions deploy add_order --entry-point main --runtime python39 --trigger-http --project=${{ secrets.PROJECT }} --allow-unauthenticated
