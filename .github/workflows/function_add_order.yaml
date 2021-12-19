@@ -1,4 +1,4 @@
-name: Cloud Functions Deploy
+name: Deploy add_order
 
 on:
   push:
